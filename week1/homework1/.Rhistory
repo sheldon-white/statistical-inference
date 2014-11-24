@@ -1,0 +1,2 @@
+duration = faithful$eruptions
+var(duration)

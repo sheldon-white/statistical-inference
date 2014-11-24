@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1415850093360.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "C248E4B7",
+    "lastKnownWriteTime" : 4050764913645415936,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "ChickWeight",
+        "contentUrl" : "content?title=ChickWeight&file=e9efdb624c5444fdbbaee978c007646d.htm",
+        "displayedObservations" : 578,
+        "displayedVariables" : 4,
+        "totalObservations" : 578,
+        "variables" : 4
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

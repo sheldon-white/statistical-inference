@@ -1,0 +1,17 @@
+{
+    "contents" : "#To further test the hospital triage system, administrators selected 200 nights\n#and randomly assigned a new triage system to be used on 100 nights and a standard\n#system on the remaining 100 nights. They calculated the nightly median waiting time (MWT)\n#to see a physician. The average MWT for the new system was 4 hours with a standard\n#deviation of 0.5 hours while the average MWT for the old system was 6 hours with a\n#standard deviation of 2 hours. Consider the hypothesis of a decrease in the mean MWT\n#associated with the new treatment. What does the 95% independent group confidence\n#interval with unequal variances suggest vis a vis this hypothesis?\n#(Because there's so many observations per group, just use the Z quantile instead of the T.)\n\nnNew = nX = 100\nmeanWaitingTimeNew = meanX = 4\nsdMWTNew = sdX = 0.5\n\nnOld = nY = 100\nmeanWaitingTimeOld = meanY = 6\nsdMWTOld = sdY = 2\n\n# pooled variance estimate: ((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2)\nvarPooled = ((nX-1) * sdX^2 + (nY-1) * sdY^2) / (nX + nY -2)\nsdPooled = sqrt(varPooled)\n\n\n#xf1 = sdX^2/nX\n#yf1 = sdY^2/nY\n\n#df = ((xf1 + yf1)^2) / ((xf1^2/(nX - 1)) + (yf1^2/(nY - 1)))\n#tdf = qt(0.95, df=df)\n\nrange = meanY - meanX + c(-1, 1) * qt(0.975, nX + nY - 2) * sdPooled * sqrt(1/ 100 + 1/100)\n\n",
+    "created" : 1415761811286.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3252742354",
+    "id" : "2EFAB5E0",
+    "lastKnownWriteTime" : 1416090889,
+    "path" : "~/Dropbox/coursera/statistical-inference/week3/quiz3prob6.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

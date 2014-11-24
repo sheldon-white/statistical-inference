@@ -1,0 +1,90 @@
+---
+title: 'Statistical Inference: Analysis of ToothGrowth Data'
+author: "Sheldon White (sheldonwhite@comcast.net)"
+output:
+  html_document:
+    css: custom.css
+    keep_md: yes
+  pdf_document: default
+---
+
+
+## Data Summary
+The ToothGrowth data-set is a set of 60 observations describing the measured tooth growth in Guinea Pigs (which will be referred to as "subjects"). Each subject apparently received supplemental Vitamin C at 0.5, 1.0 or 2.0 milligram levels, either in Orange Juice or pure Vitamin C. The units of the length values are not specified.
+
+We start by a basic plot of the data, segregating the data by supplement type.
+
+```{r plot1, fig.width=6, fig.height=2.5}
+library(ggplot2)
+data(ToothGrowth)
+ToothGrowth$dose = as.factor(ToothGrowth$dose)
+ggplot(ToothGrowth, aes(x=len, y=dose)) + geom_point(shape=1) + facet_grid(. ~ supp)      
+```
+
+Superficially, it looks like for each supplement type, increasing dosages are matched by increasing tooth length values. Let's also look at the variances of the different test groups:
+
+```{r, results="asis"}
+variances = data.frame(supplement = character(0), dosage = character(0), variance = numeric(0))
+for (s in c('OJ', 'VC')) {
+    for (d in c(0.5, 1, 2)) {
+        row = data.frame(s, d, var(subset(ToothGrowth, supp == s & dose == d)$len))
+        colnames(row) = c("suppliment", "dosage", "variance")
+        variances = rbind(variances, row)
+    }
+}
+knitr::kable(variances, align = 1)
+```
+
+Definitely some differences in the variance of the different test groups. The smaller variance values can be visually matched with a tighter grouping of values in the plot (for instance, VC at 1 milligram).
+
+## Hypothesis Tests
+We can use t-confidence intervals to perform a series of comparisons between the different sets of subjects. Each test will be framed as a 95% confidence interval for (lengthOfGroup1 - lengthOfGroup1).
+
+#####The assumptions I make in this analysis:
+
+* Each set of 10 Guinea Pigs for a dose/supplement combination are distinct. (Each pig received a single supplement at a single dosage.) A total population of 60 subjects is assumed.
+* Each population variance is assumed to be different.
+
+First we create a function to perform a T test on a specified subset of the ToothGrowth data, returning the results in a convenient format. (By default t.test() assumes a non-paired test and unequal variances, which is what we want here.)
+```{r}
+generateInterval = function(label, supp1, dose1, supp2, dose2) {
+    p = with(ToothGrowth, t.test(len[supp == supp1 & dose == dose1],
+                                 len[supp == supp2 & dose == dose2]))
+    row = data.frame(label, p$conf.int[1], p$conf.int[2], p$conf.int[2] - p$conf.int[1])
+    colnames(row) = c("comparison", "low", "high", "range")
+    row
+}
+```
+
+First, we'll compare equal dosages of the two supplements. Each row addresses the hypothesis "A given dosage of OJ causes greater tooth length than the same dosage of VC." A range that's completely positive confirms the hypothesis, but a range that include the zero point tells us that the conclusion cannot be inferred by the data.
+
+```{r, results="asis"}
+resultsSupp = data.frame(comparison = character(0), low = numeric(0), high = numeric(0), range = numeric(0))
+resultsSupp = rbind(resultsSupp, generateInterval("OJ:0.5 - VC:0.5", 'OJ', 0.5, 'VC', 0.5))
+resultsSupp = rbind(resultsSupp, generateInterval("OJ:1.0 - VC:1.0", 'OJ', 1, 'VC', 1))
+resultsSupp = rbind(resultsSupp, generateInterval("OJ:2.0 - VC:2.0", 'OJ', 2, 'VC', 2))
+knitr::kable(resultsSupp, align = 1)
+```
+
+#####We can see that at a dosage of 0.5 and 1 milligrams, the T Confidence intervals are completely greater than zero and we are justified in claiming a greater tooth length from the OJ supplements. At the dosage level of 2 milligrams, the range is basically centered around zero and we can't conclude anything from this data.
+
+Next, we'll compare different dosages of a single supplement. Each row addresses the hypothesis "A larger dosage of a supplement causes greater tooth length than a lesser dosage of the same supplement." A range that's completely positive confirms the hypothesis, but a range that include the zero point tells us that the conclusion cannot be inferred by the data.
+
+```{r, results="asis"}
+resultsDose = data.frame(label = character(0), low = numeric(0), high = integer(0))
+resultsDose = rbind(resultsDose, generateInterval("OJ:1.0 - OJ:0.5", 'OJ', 1, 'OJ', 0.5))
+resultsDose = rbind(resultsDose, generateInterval("OJ:2.0 - OJ:1.0", 'OJ', 2, 'OJ', 1))
+resultsDose = rbind(resultsDose, generateInterval("OJ:2.0 - OJ:0.5", 'OJ', 2, 'OJ', 0.5))
+resultsDose = rbind(resultsDose, generateInterval("VC:1.0 - VC:0.5", 'VC', 1, 'VC', 0.5))
+resultsDose = rbind(resultsDose, generateInterval("VC:2.0 - VC:1.0", 'VC', 2, 'VC', 1))
+resultsDose = rbind(resultsDose, generateInterval("VC:2.0 - VC:0.5", 'VC', 2, 'VC', 0.5))
+knitr::kable(resultsDose, align = 1)
+```
+
+#####In all cases, a larger dosage appears to result in greater tooth growth. The most questionable case is comparing OJ at 2 milligrams versus OJ at 1 milligram. Here the lower bound of the range is very close to zero and we probably have the least confidence about this prediction.
+
+
+---
+```{r sessionInfo, include=TRUE, echo=TRUE, results='markup'}
+sessionInfo()
+```

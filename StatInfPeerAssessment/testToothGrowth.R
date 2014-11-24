@@ -1,0 +1,5 @@
+library(ggplot2)
+data(ToothGrowth)
+ToothGrowth$dose = as.factor(ToothGrowth$dose)
+p = ggplot(ToothGrowth, aes(x=len, y=dose)) + geom_point(shape=1) + facet_grid(. ~ supp)
+print(p)

@@ -1,0 +1,17 @@
+{
+    "contents" : "#In a study of emergency room waiting times, investigators consider a new\n#and the standard triage systems. To test the systems, administrators selected\n#20 nights and randomly assigned the new triage system to be used on 10 nights\n#and the standard system on the remaining 10 nights.\n#They calculated the nightly median waiting time (MWT) to see a physician.\n#The average MWT for the new system was 3 hours with a variance of 0.60\n#while the average MWT for the old system was 5 hours with a variance of 0.68.\n#Consider the 95% confidence interval estimate for the differences of the mean\n#MWT associated with the new system. Assume a constant variance.\n#What is the interval? Subtract in this order (New System - Old System).\n\n\nnOld = nX = 10\nmedWaitTimeOld = meanX = 5\nvarOld = vX = 0.68\nsdX = sqrt(vX)\n\nnNew = nY = 10\nmedWaitTimeNew = meanY = 3\nvarNew = vY = 0.60\nsdY = sqrt(vY)\n\nxf1 = sdX^2/nX\nyf1 = sdY^2/nY\n\ndf = ((xf1 + yf1)^2) / ((xf1^2/(nX - 1)) + (yf1^2/(nY - 1)))\ntdf = qt(0.975, df=df)\n\nrange = meanY - meanX + c(-1, 1) * tdf * sqrt(xf1 + yf1)\n\n",
+    "created" : 1416162589407.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3043571514",
+    "id" : "73CC038E",
+    "lastKnownWriteTime" : 1415935322,
+    "path" : "~/Dropbox/coursera/statistical-inference/week3/quiz3prob4.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

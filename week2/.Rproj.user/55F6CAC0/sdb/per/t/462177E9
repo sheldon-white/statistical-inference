@@ -1,0 +1,17 @@
+{
+    "contents" : "numMen = n = 9\navgBrainVol = mn = 1100\nsd = 30\nconInt95 = mn + c(-1, 1) * qt(.975, n - 1) * sd / sqrt(n)\n",
+    "created" : 1416162534586.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3196126492",
+    "id" : "462177E9",
+    "lastKnownWriteTime" : 1415762028,
+    "path" : "~/Dropbox/coursera/statistical-inference/week3/quiz3prob1.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

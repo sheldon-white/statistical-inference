@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1415850085846.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "869B5C1",
+    "lastKnownWriteTime" : -3458764513820540928,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "wideCW",
+        "contentUrl" : "content?title=wideCW&file=5aa8e0b4da824741b3ee4250742116d3.htm",
+        "displayedObservations" : "50",
+        "displayedVariables" : 15,
+        "totalObservations" : "50",
+        "variables" : "15"
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

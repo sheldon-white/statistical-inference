@@ -1,0 +1,17 @@
+{
+    "contents" : "numSubjects = n = 9\navgWeightChange = mn = -2\nsd = 3\nconInt95Upper = 0\nsd = sqrt(n) * (conInt95Upper - mn) / qt(.975, n - 1)\n",
+    "created" : 1416162562124.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3746298577",
+    "id" : "D9B931D9",
+    "lastKnownWriteTime" : 1415762391,
+    "path" : "~/Dropbox/coursera/statistical-inference/week3/quiz3prob2.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

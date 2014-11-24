@@ -1,0 +1,17 @@
+{
+    "contents" : "E[X] = expected value = sum(value * P(value))\nE[roll of dice] = 1*1/6 + 2*1/6 + ... 6*1/6 = 3.5\nE[fair coin flip] = 0*1/2 + 1*1/2 = 1/2\n\nvariance = V[X] = E[X^2] - E[X]^2\nV[roll of dice] = 1/6 * (1 + 4 + 9 + 16 + 25 + 36) - 3.5 ~ 2.92\nV[fair coin flip] = 1/2 - 1/4 = 0.25\n\nvariance of sample = σ^2/N\n\n\nuse pnorm to calculate probability of result, given number of samples, mean value and SD\nQ: Suppose that the number of web hits to a particular site are approximately normally distributed with a mean of 100 hits per day and a standard deviation of 10 hits per day. What's the probability that a given day has fewer than 93 hits per day expressed as a percentage to the nearest percentage point?\nA: round(pnorm(93, mean = 100, sd = 10) * 100)\n\n\nQ: use qnorm to calculate quantile value, given quantile, mean value and SD\nSuppose that the number of web hits to a particular site are approximately normally distributed with a mean of 100 hits per day and a standard deviation of 10 hits per day. What number of web hits per day represents the number so that only 5% of days have more hits? Express your answer to 3 decimal places.\nA: round(qnorm(.95, mean = 100, sd = 10), 3)\n\n\nQ: Your friend claims that changing the font to comic sans will result in more ad revenue on your web sites. When presented in random order, 9 pages out of 10 had more revenue when the font was set to comic sans. If it was really a coin flip for these 10 sites, what's the probability of getting 9 or 10 out of 10 with more revenue for the new font?\nA: This calculation is called a P-value. In R do pbinom(8, 10, 0.5, lower.tail = FALSE) lower.tail: if TRUE (default), probabilities are P[X ≤ x], otherwise, P[X > x].\n\n\nConsider the father.son data. Using the CLT and assuming that the fathers are a random sample from a population of interest, what is a 95% confidence mean height in inches?\nlibrary(UsingR)\nx = father.son$fheight\n> mean(x) + qnorm(c(.025, .975)) * sd(x) / sqrt(length(x))\n[1] 67.52324 67.85095\n\nQ: You flip a fair coin 5 times, about what's the probability of getting 4 or 5 heads?\nA: sum(dbinom(c(4,5),size=5,prob=1/2))\n[1] 0.1875\n\n\nQ: The respiratory disturbance index (RDI), a measure of sleep disturbance, for a specific population has a mean of 15 (sleep events per hour) and a standard deviation of 10. They are not normally distributed. Give your best estimate of the probability that a sample mean RDI of 100 people is between 14 and 16 events per hour?\n\nA: standard error = σ/sqrt(N)\nHere, roughly = to 10 / sqrt(100) = 1\nCLT says that sample means are normally distributed, so what proportion is within += 1 sample error? \npnorm(c(-1,1))\n[1] 0.1586553 0.8413447\n.841-.16\n 0.681 = 68%\n\n\nQ: Consider the father.son data. Using the CLT and assuming that the fathers are a random sample from a population of interest, what is a 95% confidence mean height in inches?\n\nA: x = father.son$fheight\nmean(x) + c(-1,1) * qnorm(0.975) * sd(x)/sqrt(length(x))\n[1] 67.52324 67.85095\n",
+    "created" : 1415477264398.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2884486773",
+    "id" : "526CDFF6",
+    "lastKnownWriteTime" : 1415678122,
+    "path" : "~/Dropbox/coursera/statistical-inference/cheat-sheet.txt",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "text"
+}

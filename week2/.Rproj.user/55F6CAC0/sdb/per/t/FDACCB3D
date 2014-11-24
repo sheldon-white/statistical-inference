@@ -1,0 +1,17 @@
+{
+    "contents" : "#Suppose that 18 obese subjects were randomized, 9 each, to a new diet pill and a placebo.\n#Subjects’ body mass indices (BMIs) were measured at a baseline and again after having\n#received the treatment or placebo for four weeks. The average difference from follow-up\n#to the baseline (followup - baseline) was −3 kg/m2 for the treated group and 1 kg/m2 for\n#the placebo group. The corresponding standard deviations of the differences was 1.5 kg/m2\n#for the treatment group and 1.8 kg/m2 for the placebo group.\n#Does the change in BMI over the four week period appear to differ between the treated\n#and placebo groups? Assuming normality of the underlying data and a common population\n#variance, calculate the relevant *90%* t confidence interval.\n#Subtract in the order of (Treated - Placebo) with the smaller (more negative) number first.\n\n\nnPlacebo = nX = 9\nplaceboDiff = meanX = 1\nsdPlacebo = sdX = 1.8\n\nnTreated = nY = 9\ntreatedDiff = meanY = -3\nsdTreated = sdY = 1.5\n\nxf1 = sdX^2/nX\nyf1 = sdY^2/nY\n\ndf = ((xf1 + yf1)^2) / ((xf1^2/(nX - 1)) + (yf1^2/(nY - 1)))\ntdf = qt(0.95, df=df)\n\nrange = meanY - meanX + c(-1, 1) * tdf * sqrt(xf1 + yf1)\n\n",
+    "created" : 1416162736993.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "762043561",
+    "id" : "FDACCB3D",
+    "lastKnownWriteTime" : 1415936922,
+    "path" : "~/Dropbox/coursera/statistical-inference/week3/quiz3prob7.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
